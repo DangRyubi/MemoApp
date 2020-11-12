@@ -23,15 +23,15 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 const App = createStackNavigator({
-  LoginScreen:      { screen: LoginScreen },
   SignupScreen:     { screen: SignupScreen },
+  LoginScreen:      { screen: LoginScreen },
   Home:             { screen: MemoListScreen },
   MemoDetailScreen: { screen: MemoDetailScreen },
   MemoEditScreen:   { screen: MemoEditScreen },
 },
 {
   defaultNavigationOptions: {
-    headerTitle: 'Memot',
+    headerTitle: 'QuickRide',
     headerStyle: {
       backgroundColor: '#09086E',
     },

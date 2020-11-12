@@ -6,8 +6,12 @@ import MemoDetailScreen from './src/screens/MemoDetailScreen';
 import MemoEditScreen from './src/screens/MemoEditScreen';
 import LoginScreen from './src/screens/LoginScreen';
 import SignupScreen from './src/screens/SignupScreen';
+import MemoCreateScreen from './src/screens/MemoCreateScreen';
 
 import ENV from './env.json';
+
+// eslint-disable-next-line
+require("firebase/firestore");
 
 const firebaseConfig = {
   apiKey: ENV.FIREBASE_API_KEY,
@@ -23,8 +27,9 @@ if (firebase.apps.length === 0) {
   firebase.initializeApp(firebaseConfig);
 }
 const App = createStackNavigator({
-  SignupScreen:     { screen: SignupScreen },
   LoginScreen:      { screen: LoginScreen },
+  MemoCreateScreen:   { screen: MemoCreateScreen },
+  SignupScreen:     { screen: SignupScreen },
   Home:             { screen: MemoListScreen },
   MemoDetailScreen: { screen: MemoDetailScreen },
   MemoEditScreen:   { screen: MemoEditScreen },

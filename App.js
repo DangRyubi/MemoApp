@@ -28,8 +28,8 @@ if (firebase.apps.length === 0) {
 }
 const App = createStackNavigator({
   LoginScreen:      { screen: LoginScreen },
-  MemoCreateScreen:   { screen: MemoCreateScreen },
   SignupScreen:     { screen: SignupScreen },
+  MemoCreateScreen:   { screen: MemoCreateScreen },
   Home:             { screen: MemoListScreen },
   MemoDetailScreen: { screen: MemoDetailScreen },
   MemoEditScreen:   { screen: MemoEditScreen },

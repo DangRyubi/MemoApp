@@ -9,9 +9,9 @@ class MemoCreateScreen extends React.Component {
   }
 
   handlePress() {
-    const { params } = this.props.navigation.state;
     const db = firebase.firestore();
-    db.collection(`users/${params.currentUser.uid}/memos`).add({
+    const { currentUser } = firebase.auth();
+    db.collection(`users/${currentUser.uid}/memos`).add({
       body: this.state.body,
       createdOn : new Date(),
     })
@@ -21,6 +21,7 @@ class MemoCreateScreen extends React.Component {
       .catch((error) => {
         console.log(error);
       });
+    this.props.navigation.navigate('Home');
   }
 
   render() {
@@ -50,6 +51,7 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     paddingRight: 16,
     paddingBottom: 16,
+    fontSize: 18,
   },
 });
 

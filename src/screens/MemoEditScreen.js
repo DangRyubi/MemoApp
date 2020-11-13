@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
-
 import CicleButton from '../elements/CircleButton';
 
 class MemoEditScreen extends React.Component {

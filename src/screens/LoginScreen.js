@@ -1,9 +1,10 @@
 import React from 'react';
 // import firebase from 'firebase';
 import {
-  StyleSheet, View, TextInput, TouchableHighlight, Text,
+  StyleSheet, View, TextInput, TouchableHighlight, Text, TouchableOpacity,
 } from 'react-native';
 import firebase from 'firebase';
+// import { NavigationActions } from '@react-navigation/compat';
 
 class LoginScreen extends React.Component {
   state = {
@@ -13,13 +14,24 @@ class LoginScreen extends React.Component {
   // eslint-disable-next-line
 handleSubmit() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(({ user }) => {
-        console.log('success!', user);
+      .then(() => {
         this.props.navigation.navigate('Home');
+        /*
+        const resetAction = NavigationActions.reset({
+          index: 0,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Home' }),
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
+        */
       })
-      .catch((error) => {
-        console.log('error!', error);
+      .catch(() => {
       });
+  }
+
+  handlePress() {
+    this.props.navigation.navigate('SignupScreen');
   }
 
   render() {
@@ -52,6 +64,13 @@ handleSubmit() {
         >
           <Text style={styles.buttonTitle}>ログインする</Text>
         </TouchableHighlight>
+
+        <TouchableOpacity
+          style={styles.signUp}
+          onPress={this.handlePress.bind(this)}
+        >
+          <Text style={styles.signUpText}>メンバー登録</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -90,6 +109,13 @@ const styles = StyleSheet.create({
   buttonTitle: {
     color: '#FFF',
     fontSize: 18,
+  },
+  signUp: {
+    marginTop: 16,
+    alignSelf: 'center',
+  },
+  signUpText: {
+    fontSize: 16,
   },
 });
 

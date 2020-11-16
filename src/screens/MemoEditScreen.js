@@ -15,11 +15,9 @@ class MemoEditScreen extends React.Component {
       body: params.body,
       key: params.key,
     });
-    console.log(this.state.body);
   }
 
   async handlePress() {
-    console.log('pressed');
     const { currentUser } = firebase.auth();
     const newDate = firebase.firestore.Timestamp.now();
     if (currentUser !== null && currentUser !== undefined) {
@@ -40,8 +38,7 @@ class MemoEditScreen extends React.Component {
           });
           navigation.goBack();
         })
-        .catch((error) => {
-          console.log(error);
+        .catch(() => {
         });
     }
   }

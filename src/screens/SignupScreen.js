@@ -3,6 +3,7 @@ import {
   StyleSheet, View, TextInput, TouchableHighlight, Text,
 } from 'react-native';
 import firebase from 'firebase';
+// import { StackActions } from '@react-navigation/compat';
 
 class SignupScreen extends React.Component {
   state = {
@@ -15,7 +16,17 @@ class SignupScreen extends React.Component {
       .then(({ user }) => {
         console.log('success!', user);
         this.props.navigation.navigate('Home');
+        /*
+        const resetAction = StackActions.reset({
+          index: 0,
+          actions: [
+            StackActions.navigate({ routeName: 'Home' }),
+          ],
+        });
+        this.props.navigation.dispatch(resetAction);
+        */
       })
+
       .catch((error) => {
         console.log(error);
       });

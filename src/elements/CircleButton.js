@@ -45,7 +45,10 @@ class CircleButton extends React.Component { // フォント読み込み
         <View style={[styles.circleButton, style, { backgroundColor: bgColor }]}>
           {
           this.state.fontsLoaded ? (
-            <CustomIcon name={name} style={[styles.circleButtonTitle, { color: textColor }]} />
+            <CustomIcon
+              name={name}
+              style={[styles.circleButtonTitle, { color: textColor }]}
+            />
           ) : <AppLoading />
           }
         </View>
@@ -60,9 +63,11 @@ const styles = StyleSheet.create({
     bottom: 32,
     right: 32,
     width:56,
-    height:56,
+    height:105,
   },
   circleButton: {
+    position: 'relative',
+    top:0,
     width: 56,
     height: 56,
     alignItems: 'center',
@@ -72,6 +77,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    elevation:4,
   },
   circleButtonTitle: {
     fontFamily: 'FontAwsome',

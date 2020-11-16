@@ -54,6 +54,12 @@ class MemoDetailScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  editButton: {
+    position:'absolute',
+    top:48,
+    height:56,
+    width:56,
+  },
   container: {
     flex: 1,
     width: '100%',
@@ -85,9 +91,6 @@ const styles = StyleSheet.create({
   memoBody: {
     lineHeight:22,
     fontSize:15,
-  },
-  editButton: {
-    top: 48,
   },
 });
 

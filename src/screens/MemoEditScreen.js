@@ -21,17 +21,24 @@ class MemoEditScreen extends React.Component {
   async handlePress() {
     console.log('pressed');
     const { currentUser } = firebase.auth();
+    const newDate = firebase.firestore.Timestamp.now();
     if (currentUser !== null && currentUser !== undefined) {
       const db = firebase.firestore();
-      console.log(currentUser.uid);
-      console.log(this.state.key);
       const memoRef = db.collection(`users/${currentUser.uid}/memos`).doc(this.state.key);
+      // eslint-disable-next-line
       const res = await memoRef
         .update({
           body: this.state.body,
+          createdOn: newDate,
         })
         .then(() => {
-          console.log('success!');
+          const { navigation } = this.props;
+          navigation.state.params.returnMemo({
+            body: this.state.body,
+            key: this.state.key,
+            createdOn: newDate,
+          });
+          navigation.goBack();
         })
         .catch((error) => {
           console.log(error);

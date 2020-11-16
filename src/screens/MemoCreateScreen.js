@@ -29,7 +29,7 @@ class MemoCreateScreen extends React.Component {
       <View style={styles.container}>
         <TextInput
           style={styles.memoEditInput}
-          multiline="True"
+          multiline
           value={this.state.body}
           onChangeText={(text) => { this.setState({ body: text }); }}
         />

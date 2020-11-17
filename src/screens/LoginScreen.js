@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Expo from 'expo-secure-store';
+import * as SecureStore from 'expo-secure-store';
 import {
   StyleSheet, View, TextInput, TouchableHighlight, Text, TouchableOpacity,
 } from 'react-native';
@@ -16,9 +16,9 @@ class LoginScreen extends React.Component {
   // eslint-disable-next-line
 
   async componentDidMount() {
-    const email = await Expo.SecureStore.getItemAsync('email');
-    const password = await Expo.SecureStore.getItemAsync('password');
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    const email = await SecureStore.getItemAsync('email');
+    const password = await SecureStore.getItemAsync('password');
+    firebase.auth().signInWithEmailAndPassword(String(email), String(password))
       .then(() => {
         this.setState({ isLoading: false });
         this.props.navigation.navigate('Home');
@@ -31,8 +31,9 @@ class LoginScreen extends React.Component {
   handleSubmit() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
-        Expo.SecureStore.setItemAsync('eamil', this.state.password);
-        Expo.SecureStore.setItemAsync('password', this.state.password);
+        console.log('success');
+        SecureStore.setItemAsync('email', this.state.email);
+        SecureStore.setItemAsync('password', this.state.password);
         this.props.navigation.navigate('Home');
         /*
         const resetAction = NavigationActions.reset({
@@ -45,6 +46,7 @@ class LoginScreen extends React.Component {
         */
       })
       .catch(() => {
+        console.log('error');
       });
   }
 

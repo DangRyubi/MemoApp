@@ -66,8 +66,6 @@ const styles = StyleSheet.create({
     height:105,
   },
   circleButton: {
-    position: 'relative',
-    top:0,
     width: 56,
     height: 56,
     alignItems: 'center',

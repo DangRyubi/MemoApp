@@ -1,20 +1,38 @@
 import React from 'react';
-// import firebase from 'firebase';
+import * as Expo from 'expo-secure-store';
 import {
   StyleSheet, View, TextInput, TouchableHighlight, Text, TouchableOpacity,
 } from 'react-native';
 import firebase from 'firebase';
 // import { NavigationActions } from '@react-navigation/compat';
+import Loading from '../elements/Loading';
 
 class LoginScreen extends React.Component {
   state = {
-    email: 'user@example.com',
-    password: 'hjd133',
+    email: '',
+    password: '',
+    isLoading: true,
   }
   // eslint-disable-next-line
-handleSubmit() {
+
+  async componentDidMount() {
+    const email = await Expo.SecureStore.getItemAsync('email');
+    const password = await Expo.SecureStore.getItemAsync('password');
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(() => {
+        this.setState({ isLoading: false });
+        this.props.navigation.navigate('Home');
+      })
+      .catch(() => {
+        this.setState({ isLoading: false });
+      });
+  }
+
+  handleSubmit() {
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(() => {
+        Expo.SecureStore.setItemAsync('eamil', this.state.password);
+        Expo.SecureStore.setItemAsync('password', this.state.password);
         this.props.navigation.navigate('Home');
         /*
         const resetAction = NavigationActions.reset({
@@ -37,6 +55,7 @@ handleSubmit() {
   render() {
     return (
       <View style={styles.container}>
+        <Loading text="ログイン中" isLoading={this.state.isLoading} />
         <Text style={styles.title}>
           ログイン
         </Text>
